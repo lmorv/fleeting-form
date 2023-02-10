@@ -17,15 +17,14 @@ function preload() {
 
 }
 
-
 /**
 Description of setup
 */
 function setup() {
-    createCanvas(1920, 1080);
+    createCanvas(windowWidth, windowHeight);
     background(0);
     video = createCapture(VIDEO);
-    video.size(1920,1080);
+    video.size(windowWidth, windowHeight);
     video.hide();
 }
 
