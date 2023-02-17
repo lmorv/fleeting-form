@@ -1,36 +1,32 @@
-/**
-Title of Project
-Author Name
-
-This is a template. You must fill in the title,
-author, and this description to match your project!
-*/
-
-"use strict";
-
 var video;
+var vScale = 16;
 
-/**
-Description of preload
-*/
-function preload() {
+var particles = [];
 
-}
 
-/**
-Description of setup
-*/
+var timer = 0;
+
 function setup() {
-    createCanvas(windowWidth, windowHeight);
-    background(0);
-    video = createCapture(VIDEO);
-    video.size(windowWidth, windowHeight);
-    video.hide();
+  createCanvas(windowWidth, windowHeight);
+  pixelDensity(1);
+  video = createCapture(VIDEO);
+  video.size(width / vScale, height / vScale);
+  for (var i = 0; i < 200; i++) {
+    particles[i] = new Particle (random(width), random(height));
+  }
+  
+video.hide();
+  background(0);
+  
+//   background(51);
 }
 
-/**
-Description of draw()
-*/
 function draw() {
-    image(video, 0, 0, width, height);
+  video.loadPixels();
+  for (var i = 0; i < particles.length; i++) {
+    particles[i].update();
+    particles[i].show();
+
+    
+  }
 }
