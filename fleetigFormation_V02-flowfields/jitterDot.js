@@ -1,7 +1,7 @@
 // Daniel Shiffman
 // code for https://youtu.be/vqE8DMfOajk
 
-function Particle(x, y) {
+function JitterDot(x, y) {
     this.x = x;
     this.y = y;
         
@@ -28,32 +28,27 @@ function Particle(x, y) {
     };
   
     this.show = function() {
-      noStroke();
-      var px = floor(this.x / vScale);
-      var py = floor(this.y / vScale);
-      var col = video.get(px, py);
-      var brightness = floor((col[0] + col[1] + col[2])/3);
-    
+
+        console.log("Showing!");
+        noStroke();
+        var px = floor(this.x / vScale);
+        var py = floor(this.y / vScale);
+        colJitter = video.get(px, py);
+        var brightness = floor((colJitter[0] + colJitter[1] + colJitter[2])/3);
+
+        console.log(colJitter);
+
       if (brightness > 77){
-        fill(col[0], col[1], col[2], 100);
+        fill(colJitter[0], colJitter[1], colJitter[2], 100);
         this.r = floor(map(brightness, 0, 255, 70, 50));
       }
       else{
         this.r = floor(map(brightness, 0, 255, 20, 40));
-        fill(col[0], col[1], col[2], 150);
-      }
-
-  
-      //console.log(col);
-      //delayTime(7);
-      if (millis() - timer > 2000){
-        
-        timer = millis();
+        fill(colJitter[0], colJitter[1], colJitter[2], 150);
       }
 
     //   fill(col[0], col[1], col[2], 100);
       ellipse(this.x, this.y, this.r, this.r);
-      
-      //triangle(this.x, this.y, this.x + 5, this.y + 5, this.x +5 , this.y + 5);
+    
     };
   }

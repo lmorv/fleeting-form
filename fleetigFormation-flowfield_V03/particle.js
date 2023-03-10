@@ -6,7 +6,7 @@ function Particle() {
     this.pos = createVector(random(width), random(height));
     this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
-    this.maxspeed = 25;
+    this.maxspeed = 15;
     this.h = 0;
   
     this.prevPos = this.pos.copy();
@@ -31,22 +31,34 @@ function Particle() {
     };
   
     this.show = function() {
-      if (millis() - timer > 250){
-        //tint(255,5);
+      if (millis() - timer > 1000){
+        //tint(255,7);
         //currImage = image(video,0,0, width, height);
         //currImage = new Image(currImage);
+        //if (typeof(currImage) != undefined){
+          //imageArray[imageArrayIndex]=currImage;
+          //imageArrayIndex = imageArrayIndex + 1;
+          //if (imageArrayIndex > 60){
+          //  imageArrayIndex = 0;
+          //}
+        //}
         //console.log(typeof(currImage));
         timer = millis();
+        opacity = opacity - 8;
+        if (opacity<0) {
+          opacity = 255;
+
+        }
       }
       var px = floor(this.pos.x / vScale);
       var py = floor(this.pos.y / vScale);
-      colFlow = video.get(px, py);  
-      
-      var strokeR = colFlow[0] - this.h;
-      var strokeG = colFlow[1] - this.h;
-      var strokeB = colFlow[2] - this.h;
-      var brightness = (strokeR + strokeG + strokeB)/3 + this.h;
-      var opacity = floor(map(brightness,0,255,100,150));
+      var col = video.get(px, py);  
+      console.log(opacity);
+      var strokeR = col[0] - this.h;
+      var strokeG = col[1] - this.h;
+      var strokeB = col[2] - this.h;
+      //var brightness = (strokeR + strokeG + strokeB)/3 + this.h;
+      //floor(map(brightness,0,255,100,150));
       if ((strokeR>150)&(strokeG>150)&(strokeB>150)){
         stroke(strokeR, strokeG, strokeB, opacity);
       }
@@ -56,7 +68,10 @@ function Particle() {
       
       strokeWeight(1);
       
+      
+      //setTimeout(line,7000);
       line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+      
       this.updatePrev();
     };
   
@@ -65,6 +80,7 @@ function Particle() {
       this.prevPos.y = this.pos.y;
     };
   
+    
     this.edges = function() {
       if (this.pos.x > width) {
         this.pos.x = 0;

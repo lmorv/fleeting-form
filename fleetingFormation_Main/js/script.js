@@ -3,7 +3,6 @@ var vScale = 16;
 
 var particles = [];
 
-
 var timer = 0;
 
 function setup() {
@@ -26,7 +25,5 @@ function draw() {
   for (var i = 0; i < particles.length; i++) {
     particles[i].update();
     particles[i].show();
-
-    
   }
 }
