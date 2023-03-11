@@ -5,9 +5,9 @@
 
 var inc = 0.1;
 var scl = 10;
-var cols, rows;
+var cols, rows; // Columns and rows of the pixel processing for loop.
 
-var zoff = 0;
+var zoff = 0; // Offset in Perlin noise space, for flow field 
 
 var fr;
 
@@ -28,7 +28,7 @@ var opacity = 255;
 
 
 function setup() {
-  createCanvas(640*2, 480*2);
+  createCanvas(640*2, 480*2); // create canvas with desired dimensions.
   cols = floor(width / scl);
   rows = floor(height / scl);
   fr = createP('');
@@ -49,6 +49,7 @@ function setup() {
 
 function draw() {
   var yoff = 0;
+  
   for (var y = 0; y < rows; y++) {
     var xoff = 0;
     for (var x = 0; x < cols; x++) {

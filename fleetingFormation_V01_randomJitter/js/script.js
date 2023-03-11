@@ -3,6 +3,7 @@ var vScale = 16;
 
 var particles = [];
 
+var opacity = 200;
 
 var timer = 0;
 
@@ -24,9 +25,8 @@ video.hide();
 function draw() {
   video.loadPixels();
   for (var i = 0; i < particles.length; i++) {
+
     particles[i].update();
     particles[i].show();
-
-    
   }
 }

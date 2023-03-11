@@ -15,20 +15,32 @@ function Particle(x, y) {
   
     this.update = function() {
         
-        console.log("updating");
+        // console.log("updating");
         //this.xOffset1 += this.speed;
         //this.xOffset2 += this.speed;
 
         //this.x += this.xOffset1;
         //this.y += this.xOffset2;
-     this.x += random(-10, 10);
-     this.y += random(-10, 10);
+     this.x += random(-5, 5);
+     this.y += random(-5, 5);
 
       this.x = constrain(this.x, 0, width);
       this.y = constrain(this.y, 0, height);
     };
   
     this.show = function() {
+      // Timed opacity control: 
+      if (millis() - timer > 1000){ // Check if time from start of program (in millis) minus timer is greater than a given number.
+        timer = millis();
+        opacity = opacity - 8;
+        console.log("Opacity: " + opacity);
+
+        if (opacity<0) {
+          opacity = 255;
+
+        }
+      }
+
       noStroke();
       var px = floor(this.x / vScale);
       var py = floor(this.y / vScale);
@@ -36,12 +48,12 @@ function Particle(x, y) {
       var brightness = floor((col[0] + col[1] + col[2])/3);
     
       if (brightness > 77){
-        fill(col[0], col[1], col[2], 100);
+        fill(col[0], col[1], col[2], opacity);
         this.r = floor(map(brightness, 0, 255, 70, 50));
       }
       else{
         this.r = floor(map(brightness, 0, 255, 20, 40));
-        fill(col[0], col[1], col[2], 150);
+        fill(col[0], col[1], col[2], opacity);
       }
 
     
