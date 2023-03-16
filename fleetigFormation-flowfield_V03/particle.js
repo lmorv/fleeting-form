@@ -8,6 +8,8 @@ function Particle() {
     this.acc = createVector(0, 0);
     this.maxspeed = 15;
     this.h = 0;
+    this.lineWeight;
+    this.angle = 0; // oscillation value used to change Line weight acording to a sin wave.
   
     this.prevPos = this.pos.copy();
   
@@ -31,7 +33,12 @@ function Particle() {
     };
   
     this.show = function() {
-      if (millis() - timer > 1000){
+
+      this.lineWeight = map(sin(this.angle),-1 ,1 , 1, 10); // Set value of lineWeight property.
+      strokeWeight(this.lineWeight); // Use lineWeight property to the set the stroke size of lines 
+      this.angle += 0.04;
+
+      if (millis() - timer > 10000){
         //tint(255,7);
         //currImage = image(video,0,0, width, height);
         //currImage = new Image(currImage);
@@ -45,20 +52,23 @@ function Particle() {
         //console.log(typeof(currImage));
         timer = millis();
         opacity = opacity - 8;
+        this.lineWeight = this.lineWeight - 1;
         if (opacity<0) {
           opacity = 255;
-
+          this.lineWeight = this.lineWeight + 2;
         }
       }
+
       var px = floor(this.pos.x / vScale);
       var py = floor(this.pos.y / vScale);
       var col = video.get(px, py);  
-      console.log(opacity);
+      // console.log(opacity);
       var strokeR = col[0] - this.h;
       var strokeG = col[1] - this.h;
       var strokeB = col[2] - this.h;
       //var brightness = (strokeR + strokeG + strokeB)/3 + this.h;
       //floor(map(brightness,0,255,100,150));
+
       if ((strokeR>150)&(strokeG>150)&(strokeB>150)){
         stroke(strokeR, strokeG, strokeB, opacity);
       }
@@ -66,11 +76,8 @@ function Particle() {
         stroke(strokeR, strokeG, strokeB, opacity);
       }
       
-      strokeWeight(1);
-      
-      
-      //setTimeout(line,7000);
-      line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
+     
+      line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y); // Draw lines!
       
       this.updatePrev();
     };
