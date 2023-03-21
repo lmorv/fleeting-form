@@ -26,15 +26,15 @@ var imageArrayIndex = 0;
 var opacity = 255;
 
 
-console.log('ml5 version:', ml5.version);
+// console.log('ml5 version:', ml5.version);
 
 function setup() {
-  createCanvas(640*2, 480*2); // Create canvas with desired dimensions.
+  createCanvas(windowWidth -200, windowHeight - 50); // Create canvas with desired dimensions.
 
   cols = floor(width / scl);   // Set the number of rows and columns in the vector filed equal 
   rows = floor(height / scl); // to the dimensions of the canvas divided by the scale value.
 
-  fr = createP('');
+  // fr = createP('');
 
   flowfield = new Array(cols * rows);
 
@@ -44,6 +44,7 @@ function setup() {
   pixelDensity(1);
   video = createCapture(VIDEO);
   video.size(width / vScale, height / vScale);
+  video.hide();
   
   
   background(0);
@@ -93,7 +94,7 @@ function handle2DFlowField() {
     particles[i].show();
   }
 
-  fr.html(floor(frameRate()));
+  // fr.html(floor(frameRate()));
 
 }
 
