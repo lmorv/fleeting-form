@@ -14,6 +14,7 @@ function Particle() {
     this.prevPos = this.pos.copy();
   
     this.update = function() {
+      
       this.vel.add(this.acc);
       this.vel.limit(this.maxspeed);
       this.pos.add(this.vel);
@@ -21,6 +22,7 @@ function Particle() {
     };
   
     this.follow = function(vectors) {
+      
       var x = floor(this.pos.x / scl);
       var y = floor(this.pos.y / scl);
       var index = x + y * cols;
@@ -69,6 +71,7 @@ function Particle() {
     };
   
     this.updatePrev = function() {
+      
       this.prevPos.x = this.pos.x;
       this.prevPos.y = this.pos.y;
     };

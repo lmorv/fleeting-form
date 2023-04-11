@@ -38,12 +38,15 @@ function setup() {
   video = createCapture(VIDEO);
   video.size(width / vScale, height / vScale);
   video.hide();
-  
+  video.center();
   background(0);
   
 }
 
 function draw() {
+  translate(width,0); // Translate canvas to far right corner. 
+  scale(-1,1); // flip the canvas to make the image behave like a mirror.
+
  handle2DFlowField();  
 }
 
